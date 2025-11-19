@@ -1,0 +1,33 @@
+.markdown h1{
+  color: oklch(0.84 0 0);
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  padding-top: var(--mkd-gap);
+  padding-bottom: var(--mkd-gap);
+}
+
+.markdown h2, .markdown h3, .markdown h4, .markdown h5, .markdown h6{
+  color: oklch(0.84 0 0);
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  padding-top: calc(var(--mkd-gap) * 2);
+}
+
+.markdown p{
+  color: oklch(0.62 0 0);
+  font-family: "Inter", sans-serif;
+  font-size: 0.875rem;
+  padding-top: var(--mkd-gap);
+}
+
+.markdown ul{
+  list-style-type: disc;
+  list-style-position: inside;
+  padding-top: var(--mkd-gap);
+  padding-bottom: var(--mkd-gap);
+}
+
+.markdown a{
+  color: var(--color-highlight-100);
+  font-weight: 600;
+}
