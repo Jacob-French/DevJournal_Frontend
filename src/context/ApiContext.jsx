@@ -1,14 +1,21 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 import useAxios from "../hooks/useAxios";
 
 const apiContext = createContext()
 
-//routes
-const PAGES = 'http://localhost:1337/api/pages'
-const TOPICS = 'http://localhost:1337/api/topics?sort[0]=title:asc&populate[0]=icon'
-const CONTENT = 'http://localhost:1337/api/contents'
+const LOCAL_API_URL = 'http://localhost:1337'
+const CLOUD_API_URL = 'https://useful-champion-009fa3a4da.strapiapp.com'
 
 export function ApiProvider({children}){
+
+  const [cloudApi, setCloudApi] = useState(true)
+  let apiUrl = null
+  apiUrl = cloudApi ? CLOUD_API_URL : LOCAL_API_URL
+
+  //routes
+  const PAGES = `${apiUrl}/api/pages`
+  const TOPICS = `${apiUrl}/api/topics?sort[0]=title:asc&populate[0]=icon`
+  const CONTENT = `${apiUrl}/api/contents`
 
   const { request: requestPages, loading: loadingPages, error: pagesError, cancel: cancelPages } = useAxios()
   const { request: requestTopics, loading: loadingTopics, error: topicsError, cancel: cancelTopics } = useAxios()
@@ -17,6 +24,7 @@ export function ApiProvider({children}){
   const { request: requestTips, loading: loadingTips, error: tipsError, cancel: cancelTips } = useAxios()
   
   const api = {
+    url: apiUrl,
     getPages: async function(){
       const response = await requestPages(PAGES, {method: 'GET'})
       if(response){
@@ -37,7 +45,7 @@ export function ApiProvider({children}){
     },
     //PARAMETERS: ("topic name") RETURNS: list of headings
     getHeadingsByTopic: async function(topic){
-      const headings = `http://localhost:1337/api/headings?sort[0]=family_order:asc, order:asc, title:asc&filters[route][$startsWith]=/${topic}/`
+      const headings = `${apiUrl}/api/headings?sort[0]=family_order:asc, order:asc, title:asc&filters[route][$startsWith]=/${topic}/`
       const response = await requestHeadings(headings, {method: 'GET'})
       if(response){
         return response.data
@@ -48,7 +56,7 @@ export function ApiProvider({children}){
     },
     //PARAMETERS: ("route") RETURNS: Content object with a given route
     getContent: async function(route){
-      const query = `http://localhost:1337/api/contents?filters[route][$eq]=${route}&populate=*`
+      const query = `${apiUrl}/api/contents?filters[route][$eq]=${route}&populate=*`
       const response = await requestContent(query, {method: 'GET'})
       if(response){
         return response.data[0]
@@ -58,13 +66,21 @@ export function ApiProvider({children}){
       }
     },
     getTips: async function(topic){
-      const query = `http://localhost:1337/api/tips?filters[topic][$eq]=${topic}&populate=*`
+      const query = `${apiUrl}/api/tips?filters[topic][$eq]=${topic}&populate=*`
       const response = await requestTips(query, {method: 'GET'})
       if(response){
         return response.data
       }
       else{
         return null
+      }
+    },
+    formatMediaUrl: function(url){
+      if(cloudApi){
+        return url
+      }
+      else{
+        return `${LOCAL_API_URL}${url}`
       }
     }
   }

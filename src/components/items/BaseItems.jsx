@@ -1,4 +1,5 @@
 import { NavLink } from "react-router"
+import { useApi } from "../../context/ApiContext"
 
 const STRAPI_URL = 'http://localhost:1337'
 const JOURNAL_ROUTE = '/journal'
@@ -29,6 +30,9 @@ export function JaLogo(){
 }
 
 export function Topic({ topic }){
+
+  const api = useApi()
+
   return (
     <NavLink to={`${JOURNAL_ROUTE}${topic.route}`}>
       <div className={`
@@ -36,7 +40,7 @@ export function Topic({ topic }){
         border border-space-400 bg-space-200 rounded-lg p-5 shadow-md
       `}>
         <div className="flex flex-col items-center gap-1">
-          <img className="w-15 h-15" src={`${STRAPI_URL}${topic.icon.url}`} />
+          <img className="w-15 h-15" src={api.formatMediaUrl(topic.icon.url)} />
           <h2 className="font-[Poppins] text-md text-space-700">{topic.title}</h2>
         </div>
       </div>
