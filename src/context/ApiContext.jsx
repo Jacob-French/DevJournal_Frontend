@@ -8,7 +8,7 @@ const CLOUD_API_URL = 'https://useful-champion-009fa3a4da.strapiapp.com'
 
 export function ApiProvider({children}){
 
-  const [cloudApi, setCloudApi] = useState(false)
+  const [cloudApi, setCloudApi] = useState(true)
   let apiUrl = null
   apiUrl = cloudApi ? CLOUD_API_URL : LOCAL_API_URL
 
