@@ -20,7 +20,7 @@ export function FlexRowSmall({ children, className }){
   )
 }
 
-export function TipsBar({ tips, showTips }){
+export function TipsBar({ tips, showTips, displayTip }){
 
   const [on, setOn] = useState(false)
   const [shift, setShift] = useState(true)
@@ -32,12 +32,6 @@ export function TipsBar({ tips, showTips }){
   useEffect(() => {
 
     stateRef.current = { shift, hide, transition, on, showTips }
-
-    console.log("on: ", on)
-    console.log("show tips: ", showTips)
-    console.log("shift: ", shift)
-    console.log("hide: ", hide)
-    console.log("------------------------------")
     
     if(showTips && transition === 0){
       setOn(true)
@@ -90,7 +84,7 @@ export function TipsBar({ tips, showTips }){
         <span className="block font-league-spartan uppercase text-xs text-space-600 px-2">tips</span>
       </div>
       
-      <TipsFrame tips={tips} />
+      <TipsFrame tips={tips} displayTip={displayTip} />
     </div>
   )
 }

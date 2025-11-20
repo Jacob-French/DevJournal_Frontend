@@ -8,7 +8,7 @@ const CLOUD_API_URL = 'https://useful-champion-009fa3a4da.strapiapp.com'
 
 export function ApiProvider({children}){
 
-  const [cloudApi, setCloudApi] = useState(true)
+  const [cloudApi, setCloudApi] = useState(false)
   let apiUrl = null
   apiUrl = cloudApi ? CLOUD_API_URL : LOCAL_API_URL
 
@@ -27,6 +27,7 @@ export function ApiProvider({children}){
     url: apiUrl,
     getPages: async function(){
       const response = await requestPages(PAGES, {method: 'GET'})
+      console.log("API request: pages")
       if(response){
         return response.data
       }
@@ -36,6 +37,7 @@ export function ApiProvider({children}){
     },
     getTopics: async function(){
       const response = await requestTopics(TOPICS, {method: 'GET'})
+      console.log("API request: topics")
       if(response){
         return response.data
       }
@@ -47,6 +49,7 @@ export function ApiProvider({children}){
     getHeadingsByTopic: async function(topic){
       const headings = `${apiUrl}/api/headings?sort[0]=family_order:asc, order:asc, title:asc&filters[route][$startsWith]=/${topic}/`
       const response = await requestHeadings(headings, {method: 'GET'})
+      console.log("API request: headings")
       if(response){
         return response.data
       }
@@ -58,6 +61,7 @@ export function ApiProvider({children}){
     getContent: async function(route){
       const query = `${apiUrl}/api/contents?filters[route][$eq]=${route}&populate=*`
       const response = await requestContent(query, {method: 'GET'})
+      console.log("API request: content")
       if(response){
         return response.data[0]
       }
@@ -68,6 +72,7 @@ export function ApiProvider({children}){
     getTips: async function(topic){
       const query = `${apiUrl}/api/tips?filters[topic][$eq]=${topic}&populate=*`
       const response = await requestTips(query, {method: 'GET'})
+      console.log("API request: tips")
       if(response){
         return response.data
       }

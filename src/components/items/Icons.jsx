@@ -64,6 +64,21 @@ export function MinimizeIcon({ className }){
   )
 }
 
+export function CloseIcon({ className }){
+
+  return(
+    <svg 
+      className={className}
+      xmlns="http://www.w3.org/2000/svg" 
+      height="24px" 
+      viewBox="0 -960 960 960" 
+      width="24px" 
+      fill="currentColor">
+      <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+    </svg>
+  )
+}
+
 export function Circle({ className }){
   return (
   <svg className={className} width="186" height="186" viewBox="0 0 186 186" fill="none" xmlns="http://www.w3.org/2000/svg">

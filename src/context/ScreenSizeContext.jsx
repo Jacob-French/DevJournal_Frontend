@@ -9,7 +9,7 @@ export function ScreenSizeProvider({ children }){
   useEffect(() => {
     
     function handleResize(){
-      const screen = window.matchMedia('(min-width: 768px)')
+      const screen = window.matchMedia('(min-width: 1024px)')
       setMobileScreen(! screen.matches)
     }
 

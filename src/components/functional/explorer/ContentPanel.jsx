@@ -4,8 +4,9 @@ import { useEffect, useState } from "react"
 import ReactMarkdown from 'react-markdown'
 import { ContentCode, ContentText, ContentTitle } from "./DynamicContent"
 import TipsPanel from "./TipsPanel"
+import TipsDisplay from "./TipsDisplay"
 
-export default function ContentPanel({ title, tips }){
+export default function ContentPanel({ title, tips, displayTip }){
 
   const api = useApi()
   const location = useLocation()
@@ -58,7 +59,7 @@ export default function ContentPanel({ title, tips }){
       relative w-full h-full
       border-sky-600 flex flex-row justify-start overflow-y-auto scrollbar-dark
     `}>
-      <div className="pl-20 pr-10 md:pl-10 xl:pr-5">
+      <div className="pl-20 pr-10 lg:pl-10 lg:pr-5 min-w-0 border-pink-200">
         {content && content.map((item, id) => (
           <div key={id}>
             {item}
@@ -66,9 +67,9 @@ export default function ContentPanel({ title, tips }){
         ))}
         <div className="h-10"></div>
       </div>
-      <div className="w-90 shrink-0 h-full hidden relative xl:block"></div>
-      <div className="w-90 bottom-0 top-18 right-3 fixed p-5 hidden xl:block">
-        <TipsPanel tips={tips} />
+      <div className="w-60 xl:w-90 shrink-0 h-full hidden relative lg:block"></div>
+      <div className="w-60 xl:w-90 bottom-0 top-18 right-3 fixed p-5 hidden lg:block z-300">
+        <TipsPanel tips={tips} displayTip={displayTip} />
       </div>
     </div>
   )

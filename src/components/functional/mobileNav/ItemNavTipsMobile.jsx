@@ -3,7 +3,7 @@ import { Circle, Line, MinimizeIcon, MoreIcon, TipsIcon } from "../../items/Icon
 import { NavLink } from "react-router";
 import FlexRow, { FlexRowSmall, TipsBar } from "./MobileNavComponents";
 
-export default function ItemNavTipsMobile({ items, title, tips }){
+export default function ItemNavTipsMobile({ items, title, tips, displayTip }){
 
   const [showNav, setShowNav] = useState(true)
   const [showTips, setShowTips] = useState(false)
@@ -23,7 +23,7 @@ export default function ItemNavTipsMobile({ items, title, tips }){
 
   return (
     <div className={`
-      fixed bottom-0 top-14 left-0 w-60 z-200
+      fixed bottom-0 top-14 left-0 w-60 z-400
       flex flex-col justify-start
       bg-space-200 shadow-sm shadow-gray-950
       transition-transform duration-500
@@ -57,7 +57,7 @@ export default function ItemNavTipsMobile({ items, title, tips }){
 
       <div className="w-full flex-1 relative">
 
-        <TipsBar tips={tips} showTips={showTips} />
+        <TipsBar tips={tips} displayTip={displayTip} showTips={showTips} />
       
         <div className="absolute left-0 right-0 top-0 bottom-0 flex flex-row justify-start">
           <div className="px-3 flex-1 flex flex-col relative justify-start">

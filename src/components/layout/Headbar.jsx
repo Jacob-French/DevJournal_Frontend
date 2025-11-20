@@ -20,21 +20,21 @@ export default function Headbar({ pages }){
   }
 
   return (
-    <div className="z-300">
+    <div className="z-500">
       <div className={`
-        flex flex-row justify-start px-10 border-b border-space-300 py-[var(--sd-gap-small)] md:py-[var(--sd-gap-mid)]
+        flex flex-row justify-start px-10 border-b border-space-300 py-[var(--sd-gap-small)] lg:py-[var(--sd-gap-mid)]
       `}>
         <div className="w-50 flex flex-col justify-center">
           <JaLogo />
         </div>
-        <nav className="grow-1 flex-row justify-evenly items-center hidden md:flex">
+        <nav className="grow-1 flex-row justify-evenly items-center hidden lg:flex">
           {pages.map(page => (
             <div key={page.id}>
               <JaLink to={page.route}>{page.title}</JaLink>
             </div>
           ))}
         </nav>
-        <button onClick={toggleMobileMenu} className="h-full ml-auto cursor-pointer md:hidden">
+        <button onClick={toggleMobileMenu} className="h-full ml-auto cursor-pointer lg:hidden">
           <MenuIcon className={mobileMenu ? "w-10 h-10 text-space-500" : "w-10 h-10 text-space-400"}/>
         </button>
       </div>

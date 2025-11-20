@@ -25,6 +25,7 @@ import ItemNavMobile from "./ItemNavMobile";
 import { useEffect, useState } from "react";
 import ItemNavTipsMobile from "../mobileNav/ItemNavTipsMobile";
 import { useApi } from "../../../context/ApiContext";
+import TipsDisplay from "./TipsDisplay";
 
 
 export default function Explorer({ items, isMobile }){
@@ -33,7 +34,20 @@ export default function Explorer({ items, isMobile }){
   const navigate = useNavigate()
   const title = getTopicTitle()
   const [tips, setTips] = useState(null)
+  const [showTip, setShowTip] = useState(false)
+  const [activeTip, setActiveTip] = useState(null)
 
+  function displayTip(tipEnvolope){
+    setActiveTip(tipEnvolope)
+    setShowTip(true)
+  }
+
+  function closeTip(){
+    activeTip.close()
+    setActiveTip(null)
+    setShowTip(false)
+  }
+  
   function selectFirstHeading(){
     for(const item of items){
       if(item.type !== "family"){
@@ -55,7 +69,6 @@ export default function Explorer({ items, isMobile }){
     
   useEffect(() => {
     title && api.getTips(title).then(response => {
-      console.log("tips: ", response)
       setTips(response)
     })
   }, [title])
@@ -63,8 +76,11 @@ export default function Explorer({ items, isMobile }){
   return (
     <div className="border-pink-300 w-full h-full flex flex-row justify-start relative">
       {! isMobile && Array.isArray(items) && <ItemNav items={items} title={title}></ItemNav>}
-      {isMobile && Array.isArray(items) && <ItemNavTipsMobile items={items} title={title} tips={tips} ></ItemNavTipsMobile>}
-      <ContentPanel title={title} tips={tips} />
+      {isMobile && Array.isArray(items) && <ItemNavTipsMobile items={items} title={title} tips={tips} displayTip={displayTip} ></ItemNavTipsMobile>}
+      <div className="relative border-pink-300 w-full h-full">
+        <ContentPanel title={title} tips={tips} displayTip={displayTip} />
+        {showTip && <TipsDisplay tip={activeTip.tip} close={closeTip} />}
+      </div>
     </div>
   )
 }
