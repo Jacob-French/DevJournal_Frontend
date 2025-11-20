@@ -20,7 +20,7 @@ export default function ItemNav({ items, title }){
                 <span 
                   className={`
                   font-[Poppins] text-space-800 text-sm
-                  border border-transparent px-2 py-1 my-1 rounded-xl box-content cursor-pointer
+                  border border-transparent px-2 py-1 my-1 w-full rounded-xl box-content cursor-pointer
                   hover:border hover:border-space-400 hover:bg-space-300 hover:shadow-md group-[.active]:text-space-900
                   `}>{heading.content.title}
                 </span>

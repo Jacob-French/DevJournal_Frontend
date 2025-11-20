@@ -3,6 +3,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import './DynamicContent.css'
 import { CopyIcon } from '../../items/Icons';
+import { useApi } from '../../../context/ApiContext';
 
 export function ContentTitle({ content }){
 
@@ -20,6 +21,58 @@ export function ContentText({ content }){
       <ReactMarkdown>
         {content.markdown}
       </ReactMarkdown>
+    </div>
+  )
+}
+
+export function ContentImage({ content }){
+
+  const api = useApi()
+
+  return (
+    <div className="my-10" >
+      {content.title !== "" && <span className="font-[Poppins] font-normal text-base text-space-800 pb-2">{content.title}</span>}
+      <div className="flex flex-row justify-center">
+        <img src={api.formatMediaUrl(content.image[0].url)} />
+      </div>
+    </div>
+  )
+}
+
+export function ContentImageText({ content }){
+  
+  const api = useApi()
+
+  return (
+    <div className="my-10" >
+      {content.title !== "" && <span className="font-[Poppins] font-normal text-base text-space-800 pb-2">{content.title}</span>}
+      <div className="flex flex-row justify-start">
+        {content.image_left && 
+          <>
+          <div className="flex-1">
+            <img src={api.formatMediaUrl(content.image[0].url)} />
+          </div>
+          <div className="flex-1 markdown flex flex-col justify-center">
+            <ReactMarkdown>
+              {content.text}
+            </ReactMarkdown>
+          </div>
+          </>
+        }
+        {! content.image_left && 
+          <>
+          <div className="flex-1 markdown flex flex-col justify-center">
+            <ReactMarkdown>
+              {content.text}
+            </ReactMarkdown>
+          </div>
+          <div className="flex-1 flex flex-row justify-center">
+            <img src={api.formatMediaUrl(content.image[0].url)} />
+          </div>
+          </>
+        }
+        
+      </div>
     </div>
   )
 }

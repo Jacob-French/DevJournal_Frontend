@@ -60,9 +60,11 @@ export function ApiProvider({children}){
     //PARAMETERS: ("route") RETURNS: Content object with a given route
     getContent: async function(route){
       const query = `${apiUrl}/api/contents?filters[route][$eq]=${route}&populate=*`
-      const response = await requestContent(query, {method: 'GET'})
+      const query2 = `${apiUrl}/api/contents?filters[route][$eq]=${route}&populate[content_zone][populate]=*`
+      const response = await requestContent(query2, {method: 'GET'})
       console.log("API request: content")
       if(response){
+        console.log("content data: ", response.data[0])
         return response.data[0]
       }
       else{

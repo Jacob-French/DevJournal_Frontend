@@ -80,8 +80,8 @@ export function TipsBar({ tips, showTips, displayTip }){
       ${hide && "hidden"}
       ${shift && "-translate-x-70"}
     `}>
-      <div className="h-10 flex flex-row justify-start items-center">
-        <span className="block font-league-spartan uppercase text-xs text-space-600 px-2">tips</span>
+      <div className="pt-5 flex flex-row justify-start items-center">
+        <span className="block font-league-spartan uppercase text-xs text-space-800 px-5">tips</span>
       </div>
       
       <TipsFrame tips={tips} displayTip={displayTip} />

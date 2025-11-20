@@ -2,7 +2,7 @@ import { useLocation } from "react-router"
 import { useApi } from "../../../context/ApiContext"
 import { useEffect, useState } from "react"
 import ReactMarkdown from 'react-markdown'
-import { ContentCode, ContentText, ContentTitle } from "./DynamicContent"
+import { ContentCode, ContentImage, ContentImageText, ContentText, ContentTitle } from "./DynamicContent"
 import TipsPanel from "./TipsPanel"
 import TipsDisplay from "./TipsDisplay"
 
@@ -35,6 +35,14 @@ export default function ContentPanel({ title, tips, displayTip }){
           break
         case "content-blocks.code":
           contentArray.push(<ContentCode content={item} />)
+          break
+        case "content-blocks.image":
+          contentArray.push(<ContentImage content={item} />)
+          break
+        case "content-blocks.image-and-text":
+          contentArray.push(<ContentImageText content={item} />)
+        default: 
+        console.log("content: ", item.__component)
       }
     })
 
