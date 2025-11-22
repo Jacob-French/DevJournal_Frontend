@@ -79,6 +79,22 @@ export function CloseIcon({ className }){
   )
 }
 
+export function InfoIcon({ className }){
+
+  return(
+    <svg 
+      className={className}
+      width="30" 
+      height="30" 
+      viewBox="0 0 30 30" 
+      fill="none" 
+      xmlns="http://www.w3.org/2000/svg">
+      <path d="M13.7136 22V11.0909H16.2846V22H13.7136ZM15.0062 9.54261C14.599 9.54261 14.2486 9.40767 13.9551 9.13778C13.6615 8.86316 13.5147 8.53409 13.5147 8.15057C13.5147 7.76231 13.6615 7.43324 13.9551 7.16335C14.2486 6.88873 14.599 6.75142 15.0062 6.75142C15.4181 6.75142 15.7685 6.88873 16.0574 7.16335C16.3509 7.43324 16.4977 7.76231 16.4977 8.15057C16.4977 8.53409 16.3509 8.86316 16.0574 9.13778C15.7685 9.40767 15.4181 9.54261 15.0062 9.54261Z" fill="currentColor"/>
+      <circle cx="15" cy="15" r="12" stroke="currentColor" strokeWidth="2"/>
+    </svg>
+  )
+}
+
 export function Circle({ className }){
   return (
   <svg className={className} width="186" height="186" viewBox="0 0 186 186" fill="none" xmlns="http://www.w3.org/2000/svg">

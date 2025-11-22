@@ -18,7 +18,7 @@
     The children of this component should be the content. This is so the content can be placed next to the nav bar for wide screens or behind the nav bar for narower mobile screens. The content will use routing to match up with the selected heading. 
 */
 
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import ContentPanel from "./ContentPanel";
 import ItemNav from "./ItemNav";
 import ItemNavMobile from "./ItemNavMobile";
@@ -32,6 +32,7 @@ export default function Explorer({ items, isMobile }){
 
   const api = useApi()
   const navigate = useNavigate()
+  const location = useLocation()
   const title = getTopicTitle()
   const [tips, setTips] = useState(null)
   const [showTip, setShowTip] = useState(false)
@@ -49,10 +50,12 @@ export default function Explorer({ items, isMobile }){
   }
   
   function selectFirstHeading(){
-    for(const item of items){
-      if(item.type !== "family"){
-        navigate(`/journal${item.content.route}`, { replace: true })
-        break
+    if(location.pathname === `/journal/${title}`){
+      for(const item of items){
+        if(item.type !== "family"){
+          navigate(`/journal${item.content.route}`, { replace: true })
+          break
+        }
       }
     }
   }
