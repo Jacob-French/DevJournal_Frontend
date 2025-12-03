@@ -4,7 +4,7 @@ import { NavLink } from "react-router";
 export default function ItemNav({ items, title }){
   
   return (
-    <nav className="w-50 h-full bg-space-200 border-r border-space-300 p-[var(--sd-gap-mid)]">
+    <nav className="w-70 h-full bg-space-200 border-r border-space-300 p-[var(--sd-gap-mid)] z-50">
       <h1 className="font-league-spartan uppercase text-md text-[var(--color-theme-100)] mb-[var(--sd-gap-mid)]">{title}</h1>
       
       {items && items.map((heading, id) => (
@@ -20,7 +20,7 @@ export default function ItemNav({ items, title }){
                 <span 
                   className={`
                   font-[Poppins] text-space-800 text-sm
-                  border border-transparent px-2 py-1 my-1 w-full rounded-xl box-content cursor-pointer
+                  border border-transparent px-2 py-1 my-1 w-7/10 rounded-xl box-content cursor-pointer
                   hover:border hover:border-space-400 hover:bg-space-300 hover:shadow-md group-[.active]:text-space-900
                   `}>{heading.content.title}
                 </span>

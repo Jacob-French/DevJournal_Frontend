@@ -20,7 +20,7 @@ export default function Headbar({ pages }){
   }
 
   return (
-    <div className="z-500">
+    <div className="z-40 relative">
       <div className={`
         flex flex-row justify-start px-10 border-b border-space-300 py-[var(--sd-gap-small)] lg:py-[var(--sd-gap-mid)]
       `}>

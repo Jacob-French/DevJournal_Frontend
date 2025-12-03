@@ -164,8 +164,16 @@ export function ContentCodeLines({ content }){
 export function ContentCode({ content, snipit = false }){
 
   const [showInfo, setShowInfo] = useState(false)
+  const [topGap, setTopGap] = useState(null)
 
+  const divElement = useRef(null)
   const lineCount = content.code.split('\n').length
+
+  useEffect(() => {
+    const topGap = divElement.current ? divElement.current.offsetTop : null
+    setTopGap(topGap)
+  }, [divElement])
+
 
   function toggleShowInfo(){
     setShowInfo(prev => !prev)
@@ -180,11 +188,11 @@ export function ContentCode({ content, snipit = false }){
   }
 
   return (
-    <div className={`${content.gap ? "my-10" : snipit ? "my-0" : "my-4"}`}>
+    <div ref={divElement} className={`${content.gap ? "my-10" : snipit ? "my-0" : "my-4"}`}>
       <div className={`
         border-1 border-space-300 text-xl bg-space-200 rounded-xl relative
       `}>
-        {content.details && showInfo && <InfoBox content={content.details} />}
+        {content.details && showInfo && <InfoBox topGap={topGap} parentDiv={divElement.current} content={content.details} />}
         <div className={`
           ${lineCount <= 1 && ! content.title && ! content.comment ? "h-full" : "h-12"} ${content.details ? "w-22" : "w-12"}
           absolute top-0 right-0 flex flex-row justify-evenly items-center
@@ -239,23 +247,26 @@ export function ContentCode({ content, snipit = false }){
   )
 }
 
-function InfoBox({ children, content }){
+function InfoBox({ children, content, topGap, parentDiv }){
 
   const divRef = useRef(null)
   const [offsetHeight, setOffsetHeight] = useState(0)
+  const [offsetHeightDown, setOffsetHeightDown] = useState(0)
+  const translateUp = topGap ? topGap > 100 : true
 
   useEffect(() => {
     setOffsetHeight(divRef.current.offsetHeight + remToPixels(1))
-  }, [offsetHeight])
+    setOffsetHeightDown(parentDiv.offsetHeight + remToPixels(1))
+  }, [offsetHeight, offsetHeightDown])
 
   return(
     <div ref={divRef} 
       className={`
-        absolute w-full border bg-space-200 px-3 py-1 
-        border-space-300 rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.6)]
+        absolute w-full border bg-space-200 px-3 py-1 z-600
+        border-theme-100 rounded-xl shadow-[0_0_20px_rgba(0,0,0,0.6)]
         ${offsetHeight != 0 ? "visible" : "invisible"}
       `}
-      style={{ transform: `translateY(-${offsetHeight}px)` }}
+      style={{ transform: `translateY(${translateUp ? "-" : ""}${translateUp ? offsetHeight : offsetHeightDown}px)` }}
       >
       <div className="markdown mb-3">
         <ReactMarkdown>

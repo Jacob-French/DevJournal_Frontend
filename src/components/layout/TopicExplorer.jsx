@@ -49,11 +49,7 @@ export default function TopicExplorer(){
       {/*  ! screen &&  <TopicNav headings={headingsAndFamilies} /> */}
       {/* screen && <TopicNavMobile /> */}
 
-      <Explorer items={headingsAndFamilies} isMobile={screen}>
-        <p>
-          This is a paragraph to test how the layout of content in this section will work. The purpose of this paragraph is to take up space in the main content section of the mobile topic explorer so that when I add the mobile menu in I can see how its presence affects the rest of the content such as this content right here.
-        </p>
-      </Explorer>
+      <Explorer items={headingsAndFamilies} isMobile={screen} />
     </div>
   )
 }

@@ -70,10 +70,10 @@ export default function ContentPanel({ title, tips, displayTip }){
 
   return (
     <div className={`
-      relative w-full h-full bg-space-100
-      border-sky-600 flex flex-row justify-start overflow-y-auto scrollbar-dark
+      relative w-full h-full bg-space-100 overflow-y-auto
+      border-sky-600 flex flex-row justify-start scrollbar-dark
     `}>
-      <div className="pl-20 pr-10 lg:pl-10 lg:pr-5 min-w-0 border-pink-200">
+      <div className="pl-20 pr-10 lg:pl-10 lg:pr-5 min-w-0 w-full border-pink-200">
         {content && content.map((item, id) => (
           <div key={id}>
             {item}

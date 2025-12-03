@@ -29,6 +29,13 @@
   padding-left: 1rem
 }
 
+.markdown ol{
+  list-style-type: decimal;
+  padding-top: var(--mkd-gap);
+  padding-bottom: var(--mkd-gap);
+  padding-left: 1rem
+}
+
 .markdown a{
   color: var(--color-highlight-100);
   font-weight: 600;
